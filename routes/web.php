@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RestTestController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,4 +15,12 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+Route::resource('rest', RestTestController::class)->names('restTest');
+
+Route::group([
+    'namespace' => 'App\Http\Controllers\Blog', // Визначаємо namespace для контролерів
+    'prefix'    => 'blog' // Додаємо префікс 'blog' до URL-ів
+], function () {
+    Route::resource('posts', PostController::class)->names('blog.posts');
 });
