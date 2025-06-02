@@ -19,8 +19,19 @@ Route::middleware([
 Route::resource('rest', RestTestController::class)->names('restTest');
 
 Route::group([
-    'namespace' => 'App\Http\Controllers\Blog', // Визначаємо namespace для контролерів
-    'prefix'    => 'blog' // Додаємо префікс 'blog' до URL-ів
+    'namespace' => 'App\Http\Controllers\Blog',
+    'prefix'    => 'blog'
 ], function () {
     Route::resource('posts', PostController::class)->names('blog.posts');
+});
+
+$groupData = [
+    'namespace' => 'App\Http\Controllers\Blog\Admin',
+    'prefix' => 'admin/blog',
+];
+Route::group($groupData, function () {
+    $methods = ['index', 'edit', 'store', 'update', 'create',];
+    Route::resource('categories', CategoryController::class)
+        ->only($methods)
+        ->names('blog.admin.categories');
 });
