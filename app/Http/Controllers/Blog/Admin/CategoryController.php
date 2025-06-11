@@ -55,10 +55,6 @@ class CategoryController extends BaseController
         //dd(__METHOD__);
         $data = $request->input();
 
-        if (empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['title']);
-        }
-
         $item = (new BlogCategory())->create($data);
 
         if ($item) {
@@ -109,9 +105,6 @@ class CategoryController extends BaseController
         }
 
         $data = $request->all();
-        if (empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['title']);
-        }
 
         $result = $item->update($data);
 
