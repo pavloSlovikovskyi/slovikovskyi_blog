@@ -30,29 +30,23 @@ class BlogCategoryRepository extends CoreRepository
      * Отримати список категорій для виводу в випадаючий список
      * @return Collection
      */
-    public function getForComboBox()
+    /**
+     * @return string
+     */
+
+    public function getForComboBox(): Collection
     {
-        //return $this->startConditions()->all();
         $columns = implode(', ', [
             'id',
-            'CONCAT (id, ". ", title) AS id_title', // додаємо поле id_title
+            'title',
+            'parent_id',
         ]);
 
-        //$result = $this->startConditions()->all();
-        /*$result = $this                         //1 варіант
-            ->startConditions()
-            ->select('blog_categories.*',
-                \DB::raw('CONCAT (id, ". ", title) AS id_title'))
-            ->toBase()                          // не робити колекцію(масив) BlogCategory, отримати дані у вигляді класу
-            ->get();*/
-
-        $result = $this                          //2 варіант
-        ->startConditions()
-            ->selectRaw($columns)
+        $result = $this->startConditions()
+            ->select($columns)
+            ->with(['parentCategory:id,title']) // Додаємо цей рядок для eager loading
             ->toBase()
             ->get();
-
-        //dd($result); // Можна розкоментувати для налагодження
 
         return $result;
     }

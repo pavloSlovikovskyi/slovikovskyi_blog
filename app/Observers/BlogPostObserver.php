@@ -86,4 +86,42 @@ class BlogPostObserver
             $blogPost->slug = \Str::slug($blogPost->title);
         }
     }
+
+    /**
+     * Обробка перед створенням запису.
+     *
+     * @param  BlogPost  $blogPost
+     * @return void
+     */
+    public function creating(BlogPost $blogPost): void
+    {
+        $this->setPublishedAt($blogPost);
+        $this->setSlug($blogPost);
+        $this->setHtml($blogPost);
+        $this->setUser($blogPost);
+    }
+
+    /**
+     * Встановлюємо значення полю content_html з поля content_raw.
+     * * @param BlogPost $blogPost
+     * @return void
+     */
+    protected function setHtml(BlogPost $blogPost): void
+    {
+        if ($blogPost->isDirty('content_raw')) {
+            // Тут треба зробити генерацію markdown -> html
+            // Поки що просто копіюємо, пізніше можна інтегрувати Markdown-парсер
+            $blogPost->content_html = $blogPost->content_raw;
+        }
+    }
+
+    /**
+     * Якщо user_id не вказано, то встановимо юзера 1 (UNKNOWN_USER).
+     * * @param BlogPost $blogPost
+     * @return void
+     */
+    protected function setUser(BlogPost $blogPost): void
+    {
+        $blogPost->user_id = auth()->id() ?? BlogPost::UNKNOWN_USER;
+    }
 }
