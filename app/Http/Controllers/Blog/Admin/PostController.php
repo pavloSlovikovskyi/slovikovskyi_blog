@@ -53,9 +53,8 @@ class PostController extends BaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(BlogPostCreateRequest $request)
+    public function store(BlogPostCreateRequest $request) // Зверніть увагу на зміну типу запиту
     {
-        //
         $data = $request->input(); // Отримуємо масив даних, які надійшли з форми
 
         // Об'єкт BlogPost буде створений, і Observers подбають про slug, published_at, user_id, content_html
@@ -71,7 +70,6 @@ class PostController extends BaseController
                 ->withInput();
         }
     }
-
     /**
      * Display the specified resource.
      */
