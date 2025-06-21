@@ -10,4 +10,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('blog/posts', [PostController::class, 'index']);
+
 Route::get('blog/posts-ui', [PostUiController::class, 'index']);
+
+Route::get('/blog/posts/{id}', [PostController::class, 'show']);
