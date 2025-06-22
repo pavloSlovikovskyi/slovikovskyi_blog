@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
-use App\Http\Controllers\Controller; // або інший базовий контролер, від якого він успадковується
-use Illuminate\Foundation\Bus\DispatchesJobs; // <--- ДОДАЙТЕ ЦЕЙ РЯДОК
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
-class BaseController extends Controller // або ваш власний базовий клас
+class BaseController extends Controller
 {
-    use DispatchesJobs; // <--- ДОДАЙТЕ ЦЕЙ РЯДОК
+    use DispatchesJobs;
 
     public function __construct()
     {
-        // Базові налаштування або конструктор
+        //
     }
 }

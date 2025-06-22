@@ -56,11 +56,10 @@ class PostController extends BaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(BlogPostCreateRequest $request) // Зверніть увагу на зміну типу запиту
+    public function store(BlogPostCreateRequest $request)
     {
         $data = $request->input(); // Отримуємо масив даних, які надійшли з форми
 
-        // Об'єкт BlogPost буде створений, і Observers подбають про slug, published_at, user_id, content_html
         $item = (new BlogPost())->create($data);
 
         if ($item) {

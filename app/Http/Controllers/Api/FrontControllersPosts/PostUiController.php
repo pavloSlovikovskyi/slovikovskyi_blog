@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api\Blog; // Простір імен залишається той самий
+namespace App\Http\Controllers\Api\FrontControllersPosts;
 
 use App\Http\Controllers\Controller;
-use App\Models\BlogPost; // Переконайтеся, що це правильна модель
+use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class PostUiController extends Controller // Нова назва контролера
+class PostUiController extends Controller
 {
     /**
      * Display a listing of the resource with pagination and sorting for UI.
@@ -57,10 +57,4 @@ class PostUiController extends Controller // Нова назва контрол�
             ], 500);
         }
     }
-
-    // Можете залишити інші методи порожніми, оскільки ми використовуємо лише index
-    // public function store(Request $request) {}
-    // public function show(string $id) {}
-    // public function update(Request $request, string $id) {}
-    // public function destroy(string $id) {}
 }
